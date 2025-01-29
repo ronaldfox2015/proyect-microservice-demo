@@ -1,0 +1,25 @@
+services:
+  backend:
+    image: $DOCKER_IMAGE
+    container_name: $CONTAINER_NAME
+    environment:
+      HOME: /app
+      AWS_SDK_LOAD_NONDEFAULT_CONFIG: 1
+      AWS_CONFIG_FILE: /app/.aws/config
+      AWS_PROFILE: dev
+      AWS_SDK_LOAD_CONFIG: 1
+    working_dir: /app
+    entrypoint: 'pnpm start:debug'
+    volumes:
+      - ./app:/app/:rw
+      - ~/.aws/:/app/.aws/:rw
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.demo.rule=PathPrefix(`/v2/demo`)"
+      - "traefik.http.services.demo.loadbalancer.server.port=80"
+    networks:
+      - neo_network
+
+networks:
+  neo_network:
+    external: true
