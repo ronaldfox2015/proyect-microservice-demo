@@ -17,7 +17,7 @@ sync-container-config: ##@Global Sync container enviroment file from S3
 push-container-config: ##@Global Push container enviroment file to S3
 	aws s3 cp app/.env s3://$(INFRA_BUCKET)/config/container/$(OWNER)/$(ENV)/$(SERVICE_NAME)/.env --profile $(ACCOUNT_ENV)
 
-build: ##@Global Build docker image
+build-image: ##@Global Build docker image
 	docker build -f docker/local/Dockerfile --no-cache -t $(LOCAL_DOCKER_IMAGE) ./docker
 
 command: ##@Global install dependencies. make command PACKAGED=""
