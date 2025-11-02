@@ -1,0 +1,9 @@
+{
+  "exclude": [
+    "test",
+    "**/*.spec.ts",
+    "**/*.steps.ts",
+    "**/*.feature",
+    "src/main.ts"
+  ]
+}

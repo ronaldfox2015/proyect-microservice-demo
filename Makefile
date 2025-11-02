@@ -29,5 +29,5 @@ PATH_SERVICE	  = /$(VERSION)/$(SERVICE_NAME)*
 include makefiles/container.mk
 include makefiles/deploy.mk
 include makefiles/test.mk
-include makefiles/module.mk
+include makefiles/helper.mk
 include makefiles/help.mk

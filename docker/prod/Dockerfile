@@ -11,7 +11,7 @@ COPY app /app
 RUN pnpm install --prod
 RUN pnpm build
 
-RUN rm -rf coverage/ database/ test/ src/ .pnpm-store/ pnpm-lock.yaml tsconfig.build.json tsconfig.json README.md
+RUN rm -rf coverage/ database/ test/ src/ .pnpm-store/ pnpm-lock.yaml tsconfig.build.json tsconfig.json README.md createModule.js
 
 EXPOSE 80
 

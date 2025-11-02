@@ -23,7 +23,6 @@ export class AllExceptionFilter implements ExceptionFilter {
       })
     }
 
-    console.log(exception)
     return response.status(500).json({
       code: 500,
       message: exception.message,
