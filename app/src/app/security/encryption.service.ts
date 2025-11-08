@@ -2,23 +2,23 @@ import * as crypto from 'crypto'
 
 export class EncryptionService {
   private readonly algorithm = 'aes-256-gcm'
-  private readonly secret = process.env.ENCRYPTION_KEY
+  private readonly secret = 'demo' // 64 hex chars (32 bytes)
 
-  encrypt(text: string) {
-    const iv = crypto.randomBytes(16)
-    const cipher = crypto.createCipheriv(this.algorithm, Buffer.from(this.secret, 'hex'), iv)
-    let encrypted = cipher.update(text)
-    encrypted = Buffer.concat([encrypted, cipher.final()])
-    return `${iv.toString('hex')}:${encrypted.toString('hex')}`
-  }
-
-  decrypt(data: string) {
-    const [ivHex, encryptedHex] = data.split(':')
+  decrypt(encryptedData: string, ivHex: string, authTagHex: string): string {
     const iv = Buffer.from(ivHex, 'hex')
-    const encryptedText = Buffer.from(encryptedHex, 'hex')
-    const decipher = crypto.createDecipheriv(this.algorithm, Buffer.from(this.secret, 'hex'), iv)
-    let decrypted = decipher.update(encryptedText)
-    decrypted = Buffer.concat([decrypted, decipher.final()])
-    return decrypted.toString()
+    const authTag = Buffer.from(authTagHex, 'hex')
+
+    const decipher = crypto.createDecipheriv(
+      this.algorithm,
+      Buffer.from(this.secret, 'hex'),
+      iv,
+      { authTagLength: 16 }, // ✅ explícitamente define el tag length
+    )
+
+    decipher.setAuthTag(authTag) // ✅ importante para GCM
+
+    let decrypted = decipher.update(encryptedData, 'base64', 'utf8')
+    decrypted += decipher.final('utf8')
+    return decrypted
   }
 }

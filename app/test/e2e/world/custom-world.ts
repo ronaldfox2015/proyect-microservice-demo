@@ -1,10 +1,12 @@
-import { IWorldOptions, setWorldConstructor, World } from '@cucumber/cucumber'
-import { INestApplication } from '@nestjs/common'
-import { Test, TestingModule } from '@nestjs/testing'
-import { AppModule } from '../../../src/app/app.module'
+import type { INestApplication } from '@nestjs/common'
+import type { TestingModule } from '@nestjs/testing'
+import { Test } from '@nestjs/testing'
+import { ConfigServiceImplement } from '@bdd-backend/common/dist/infrastructure/services/config.service.implement'
+import type { IWorldOptions } from '@cucumber/cucumber'
+import { setWorldConstructor, World } from '@cucumber/cucumber'
 import request from 'supertest'
 import { AllExceptionFilter } from '@/app/filter/exception.filter'
-import { ConfigServiceImplement } from '@bdd-backend/common/dist/infrastructure/services/config.service.implement'
+import { AppModule } from '../../../src/app/app.module'
 
 export class CustomWorld extends World {
   app: INestApplication | null = null
@@ -16,7 +18,8 @@ export class CustomWorld extends World {
   constructor(options: IWorldOptions) {
     super(options)
 
-    this.baseUrl = process.env.E2E_BASE_URL || (options.parameters?.baseUrl as string) || 'http://localhost:3000'
+    this.baseUrl =
+      process.env.E2E_BASE_URL || (options.parameters?.baseUrl as string) || 'http://localhost:3000'
   }
 
   async initApp(): Promise<void> {

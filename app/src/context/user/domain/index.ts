@@ -1,4 +1,4 @@
-import { UserDomainService } from './services/user.domain.service';
-export { UserDomainService };
+import { UserDomainService } from './services/user.domain.service'
+export { UserDomainService }
 
-export const DOMAIN_SERVICES = [UserDomainService];
+export const DOMAIN_SERVICES = [UserDomainService]

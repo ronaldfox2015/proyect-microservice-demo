@@ -1,5 +1,5 @@
+import type { NestMiddleware } from '@nestjs/common'
 import csrf from 'csurf'
-import { NestMiddleware } from '@nestjs/common'
 
 export class CsrfMiddleware implements NestMiddleware {
   private csrfProtection = csrf({ cookie: true })

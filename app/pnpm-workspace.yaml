@@ -1,0 +1,7 @@
+ignoredBuiltDependencies:
+  - '@compodoc/compodoc'
+  - '@nestjs/core'
+  - '@scarf/scarf'
+  - argon2
+  - puppeteer
+  - unrs-resolver

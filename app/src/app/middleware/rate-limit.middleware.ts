@@ -1,5 +1,5 @@
+import type { NestMiddleware } from '@nestjs/common'
 import rateLimit from 'express-rate-limit'
-import { NestMiddleware } from '@nestjs/common'
 
 export class RateLimitMiddleware implements NestMiddleware {
   private limiter = rateLimit({

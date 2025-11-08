@@ -1,19 +1,11 @@
-import { UserService } from '@/context/user/application/services/user.service'
 import { Controller, Get, HttpCode } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
+import { UserService } from '@/context/user/application/services/user.service'
 
-@Controller()
+@ApiTags('User')
+@Controller('user')
 export class UserController {
-  constructor(userService: UserService) {}
-
-  @Get('health')
-  @HttpCode(200)
-  health(): any {
-    return {
-      code: 200,
-      message: 'health',
-      data: [],
-    }
-  }
+  constructor(protected userService: UserService) {}
 
   @Get('list')
   @HttpCode(200)
@@ -21,7 +13,7 @@ export class UserController {
     return {
       code: 200,
       message: 'health',
-      data: [],
+      data: this.userService.all(),
     }
   }
 }

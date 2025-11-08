@@ -1,7 +1,7 @@
-import { Module } from '@nestjs/common';
-import { PROVIDERS } from '@/context/user/infrastructure';
-import { APPLICATION_SERVICES } from '@/context/user/application';
-import { DOMAIN_SERVICES } from '@/context/user/domain';
+import { Module } from '@nestjs/common'
+import { APPLICATION_SERVICES } from '@/context/user/application'
+import { DOMAIN_SERVICES } from '@/context/user/domain'
+import { PROVIDERS } from '@/context/user/infrastructure'
 
 @Module({
   providers: [...APPLICATION_SERVICES, ...PROVIDERS, ...DOMAIN_SERVICES],

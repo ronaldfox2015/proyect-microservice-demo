@@ -20,6 +20,9 @@ STACK_PATH      = $(INFRA_BUCKET)/build/cloudformation/$(OWNER)/$(ENV)/$(PROJECT
 sync-deploy-config: ##Deploy Sync deploy files from S3
 	aws s3 sync s3://$(INFRA_BUCKET)/config/deploy/$(OWNER)/$(ENV)/$(SERVICE_NAME)/ deploy/ --profile $(ENV)
 
+build-dev-image: ##@Deploy Create a Docker image with the dev dependencies packaged
+  @docker build -f docker/dev/Dockerfile -t $(DEV_DOCKER_IMAGE) .
+
 tag.build:
 	echo $(TAG_DEPLOY)
 

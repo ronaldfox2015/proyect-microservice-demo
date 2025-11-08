@@ -1,6 +1,6 @@
+import type { NestMiddleware } from '@nestjs/common'
+import type { Request, Response, NextFunction } from 'express'
 import helmet from 'helmet'
-import { NestMiddleware } from '@nestjs/common'
-import { Request, Response, NextFunction } from 'express'
 
 export class HelmetMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
